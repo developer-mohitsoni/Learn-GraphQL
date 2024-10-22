@@ -13,3 +13,5 @@ type Query {
     todos: [Todo]
 }
 `;
+
+export default todosSchema;
