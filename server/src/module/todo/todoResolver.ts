@@ -43,6 +43,21 @@ const todoResolver = {
         message: "Todo Updated Successfully!",
       };
     },
+
+    toggleComplete: async (__dirname, { id, isCompleted }) => {
+      await prisma.todo.update({
+        where: {
+          id,
+        },
+        data: {
+          completed: isCompleted,
+        },
+      });
+
+      return {
+        message: "Todo Updated Successfully!",
+      };
+    },
   },
 };
 
