@@ -21,7 +21,7 @@ type Query {
 type Mutation {
     createTodo(todo: String!): Todo
     updateTodo(id: Int,todo: String): ResponseType
-    toggleComplete(id: Int, data: Boolean): Response
+    toggleComplete(id: Int, isCompleted: Boolean): Response
 }
 `;
 
