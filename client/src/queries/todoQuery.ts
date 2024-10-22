@@ -23,3 +23,12 @@ export const CREATE_TODOS = gql`
     }
   }
 `;
+
+export const TOGGLE_TODOS = gql`
+  #graphql
+  mutation TOGGLE_TODOS($id: Int!, $data: Boolean!) {
+    toggleComplete(id: $id, data: $data) {
+      message
+    }
+  }
+`;
