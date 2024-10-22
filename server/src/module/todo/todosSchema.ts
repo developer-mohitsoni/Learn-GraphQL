@@ -12,6 +12,10 @@ type Todo {
 type Query {
     todos: [Todo]
 }
+
+type Mutation {
+    createTodo(todo: String!, completed: Boolean!): Todo
+}
 `;
 
 export default todosSchema;
