@@ -58,6 +58,17 @@ const todoResolver = {
         message: "Todo Updated Successfully!",
       };
     },
+    deleteTodo: async (_, { id }) => {
+      await prisma.todo.delete({
+        where: {
+          id,
+        },
+      });
+
+      return {
+        message: "Todo Deleted Successfully!",
+      };
+    },
   },
 };
 
