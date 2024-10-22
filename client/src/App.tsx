@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { useQuery, useMutation } from "@apollo/client";
-import { CREATE_TODOS, GET_TODOS } from "./queries/todoQuery";
+import { CREATE_TODOS, GET_TODOS, TOGGLE_TODOS } from "./queries/todoQuery";
 import { Todo, TodoType } from "./types";
 
 const App = () => {
@@ -11,6 +11,8 @@ const App = () => {
   const { data, loading, error } = useQuery<TodoType>(GET_TODOS);
   const [createTodo, { data: newTodo, loading: cLoading, error: cError }] =
     useMutation(CREATE_TODOS);
+
+  const [toggleComplete] = useMutation(TOGGLE_TODOS);
 
   useEffect(() => {
     if (data?.todos) setTodos(data?.todos);
@@ -49,6 +51,13 @@ const App = () => {
       else return item;
     });
 
+    toggleComplete({
+      variables: {
+        id: id,
+        isCompleted: data,
+      },
+    });
+
     setTodos(updateTodos);
   };
 
@@ -79,7 +88,11 @@ const App = () => {
                 key={todo.id}
                 className="flex justify-between items-center bg-black rounded-md p-1 px-4 py-4 mb-2 text-white"
               >
-                <p className={`${todo.completed ? "line-through text-green-400" : ""}`}>
+                <p
+                  className={`${
+                    todo.completed ? "line-through text-green-400" : ""
+                  }`}
+                >
                   {todo.todo}
                 </p>
                 <input
