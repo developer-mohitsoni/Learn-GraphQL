@@ -11,6 +11,7 @@ type Todo {
 
 type Query {
     todos: [Todo]
+    getTodo(id: Int): Todo
 }
 
 type Mutation {
