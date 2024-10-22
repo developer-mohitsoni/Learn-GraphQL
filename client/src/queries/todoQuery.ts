@@ -26,8 +26,8 @@ export const CREATE_TODOS = gql`
 
 export const TOGGLE_TODOS = gql`
   #graphql
-  mutation TOGGLE_TODOS($id: Int!, $data: Boolean!) {
-    toggleComplete(id: $id, data: $data) {
+  mutation TOGGLE_TODOS($id: Int!, $isCompleted: Boolean!) {
+    toggleComplete(id: $id, isCompleted: $isCompleted) {
       message
     }
   }
