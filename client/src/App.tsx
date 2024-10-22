@@ -1,7 +1,12 @@
 import { useState } from "react";
+import { useQuery } from "@apollo/client";
+import { GET_TODOS } from "./queries/todoQuery";
+import { TodoType } from "./types";
 
 const App = () => {
   const [todo, setTodo] = useState("");
+
+  const { data, loading, error } = useQuery<TodoType>(GET_TODOS);
 
   const handleSubmitted = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -25,6 +30,22 @@ const App = () => {
             onChange={(e) => setTodo(e.target.value)}
           />
         </form>
+
+        <div className="h-[50vh] mt-5">
+          {loading && <p>Loading...</p>}
+          {error && <p className="text-red-300">{error.message}</p>}
+
+          {data &&
+            data?.todos.map((todo) => (
+              <div
+                key={todo.id}
+                className="flex justify-between items-center bg-blue-400 rounded-md p-1 px-4 mb-2"
+              >
+                <p>{todo.todo}</p>
+                <input type="checkbox" />
+              </div>
+            ))}
+        </div>
       </div>
     </div>
   );
