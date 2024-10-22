@@ -9,6 +9,18 @@ const todoResolver = {
         },
       }),
   },
+  Mutation: {
+    createTodo: async (_, { todo }) => {
+      const newTodo = await prisma.todo.create({
+        data: {
+          todo: todo,
+          completed: false,
+        },
+      });
+
+      return newTodo;
+    },
+  },
 };
 
 export default todoResolver;
