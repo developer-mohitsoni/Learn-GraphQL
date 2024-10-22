@@ -32,3 +32,13 @@ export const TOGGLE_TODOS = gql`
     }
   }
 `;
+
+export const DELETE_TODO = gql`
+  #graphql
+  mutation DELETE_TODO($id: Int!) {
+    deleteTodo(id: $id) {
+      message
+    }
+  }
+`;
+
