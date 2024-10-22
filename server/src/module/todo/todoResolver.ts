@@ -28,6 +28,21 @@ const todoResolver = {
 
       return newTodo;
     },
+
+    updateTodo: async (_, { id, todo }) => {
+      await prisma.todo.update({
+        where: {
+          id,
+        },
+        data: {
+          todo,
+        },
+      });
+
+      return {
+        message: "Todo Updated Successfully!",
+      };
+    },
   },
 };
 
