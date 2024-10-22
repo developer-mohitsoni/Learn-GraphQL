@@ -5,3 +5,7 @@ export interface Todo {
   todo: string;
   created_at: string;
 }
+
+export interface TodoType {
+  todos: Todo[];
+}
