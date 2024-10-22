@@ -14,7 +14,7 @@ type Query {
 }
 
 type Mutation {
-    createTodo(todo: String!, completed: Boolean!): Todo
+    createTodo(todo: String!): Todo
 }
 `;
 
