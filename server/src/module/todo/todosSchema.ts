@@ -2,6 +2,10 @@ const todosSchema = `#graphql
 
     scalar Date
 
+    type ResponseType {
+        message: String
+    }
+
 type Todo {
     id: Int!
     todo: String
@@ -16,6 +20,7 @@ type Query {
 
 type Mutation {
     createTodo(todo: String!): Todo
+    updateTodo(id: Int,todo: String): ResponseType
 }
 `;
 
