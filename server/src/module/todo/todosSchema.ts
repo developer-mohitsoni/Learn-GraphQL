@@ -22,6 +22,7 @@ type Mutation {
     createTodo(todo: String!): Todo
     updateTodo(id: Int,todo: String): ResponseType
     toggleComplete(id: Int, isCompleted: Boolean): ResponseType
+    deleteTodo(id: Int): ResponseType
 }
 `;
 
