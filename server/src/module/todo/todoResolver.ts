@@ -8,6 +8,14 @@ const todoResolver = {
           id: "desc",
         },
       }),
+
+    getTodo: async (_, { id }) => {
+      return await prisma.todo.findUnique({
+        where: {
+          id,
+        },
+      });
+    },
   },
   Mutation: {
     createTodo: async (_, { todo }) => {
