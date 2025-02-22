@@ -25,7 +25,7 @@ const App = () => {
   useEffect(() => {
     if (newTodo && newTodo.createTodo)
       setTodos([newTodo?.createTodo, ...todos]);
-  }, [newTodo]);
+  }, [newTodo, todos]);
 
   const handleSubmitted = async (e: React.FormEvent) => {
     e.preventDefault();
