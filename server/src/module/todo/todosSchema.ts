@@ -9,7 +9,7 @@ const todosSchema = `#graphql
 type Todo {
     id: Int!
     todo: String
-    completed: Boolean!
+    completed: Boolean
     created_at: Date
 }
 
