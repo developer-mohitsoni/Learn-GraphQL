@@ -44,7 +44,7 @@ const todoResolver = {
       };
     },
 
-    toggleComplete: async (__dirname, { id, isCompleted }) => {
+    toggleComplete: async (_, { id, isCompleted }) => {
       await prisma.todo.update({
         where: {
           id,
