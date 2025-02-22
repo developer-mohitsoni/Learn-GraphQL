@@ -1,7 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import "dotenv/config";
 import apolloServer from "./config/apolloServer.js";
-import { expressMiddleware } from "@apollo/server/express4";
+import { startStandaloneServer } from "@apollo/server/standalone";
 import cors from "cors";
 
 const app: Application = express();
@@ -10,22 +10,22 @@ const PORT = process.env.PORT || 3000;
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-app.use(cors())
+app.use(cors());
 
 app.get("/", (req: Request, res: Response) => {
-  return res.json({
+  res.json({
     status: 200,
     message: "App is working",
   });
 });
 
-const startApolloServer = async () => {
-  await apolloServer.start();
+const { url } = await startStandaloneServer(apolloServer, {
+  listen: {
+    port: 4000,
+  },
+});
 
-  app.use("/graphql", expressMiddleware(apolloServer));
-};
-
-startApolloServer();
+console.log(`Apollo Server started at ${url}`);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
