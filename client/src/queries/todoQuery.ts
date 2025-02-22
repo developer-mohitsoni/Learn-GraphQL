@@ -41,4 +41,3 @@ export const DELETE_TODO = gql`
     }
   }
 `;
-
