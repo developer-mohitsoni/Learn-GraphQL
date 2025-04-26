@@ -39,7 +39,8 @@
       },
       "style": {
         "useSingleCaseStatement": "warn",
-        "noInferrableTypes": "warn"
+        "noInferrableTypes": "warn",
+        "noNonNullAssertion": "off"
       },
       "nursery": {
         "useSortedClasses": {
