@@ -10,7 +10,7 @@ import prisma from "../../config/database.js";
 
 const todoResolver = {
 	Query: {
-		todos: async () =>
+		todos: async (): Promise<Todo[]> =>
 			await prisma.todo.findMany({
 				orderBy: {
 					id: "desc"

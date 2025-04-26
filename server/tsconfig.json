@@ -23,6 +23,6 @@
     "incremental": true, 
     "composite": true
   },
-  "include": ["src", "./generated/prisma"],
+  "include": ["src", "./generated/prisma", "src/module/todo/todosSchema.ts"],
   "exclude": ["node_modules"]
 }
