@@ -1,12 +1,28 @@
 {
   "compilerOptions": {
-    "rootDirs": ["src"],
-    "outDir": "dist",
-    "lib": ["es2020"],
-    "target": "es2020",
-    "module": "esnext",
-    "moduleResolution": "node",
+    "target": "ES2024",
+    "module": "NodeNext",                   
+    "moduleResolution": "nodenext",
+    "lib": ["ES2024", "DOM"],
+    "outDir": "./dist",
+    "rootDir": "./",
+    "strict": true,
     "esModuleInterop": true,
-    "types": ["node"]
-  }
+    "noImplicitAny": true,
+    "removeComments": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true,
+    "noEmit": false,
+    "types": ["node"],
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["src/*"]
+    },
+    "incremental": true, 
+    "composite": true
+  },
+  "include": ["src", "./generated/prisma"],
+  "exclude": ["node_modules"]
 }
