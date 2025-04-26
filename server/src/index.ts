@@ -1,7 +1,7 @@
 import express, {
 	type Application,
 	type Request,
-	type Response,
+	type Response
 } from "express";
 import "dotenv/config";
 import { startStandaloneServer } from "@apollo/server/standalone";
@@ -19,14 +19,14 @@ app.use(cors());
 app.get("/", (req: Request, res: Response) => {
 	res.json({
 		status: 200,
-		message: "App is working",
+		message: "App is working"
 	});
 });
 
 const { url } = await startStandaloneServer(apolloServer, {
 	listen: {
-		port: 4000,
-	},
+		port: 4000
+	}
 });
 
 console.log(`Apollo Server started at ${url}`);
