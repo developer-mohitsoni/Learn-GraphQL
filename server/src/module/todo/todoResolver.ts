@@ -10,7 +10,7 @@ import prisma from "../../config/database.js";
 
 const todoResolver = {
 	Query: {
-		todos: async (): Promise<void> =>
+		todos: async () =>
 			await prisma.todo.findMany({
 				orderBy: {
 					id: "desc"
@@ -18,11 +18,17 @@ const todoResolver = {
 			}),
 
 		getTodo: async (_: any, { id }: TodoId): Promise<Todo> => {
-			return await prisma.todo.findUnique({
+			const todo = await prisma.todo.findUnique({
 				where: {
 					id
 				}
 			});
+
+			if (!todo) {
+				throw new Error(`Todo with id ${id} not found`);
+			}
+
+			return todo;
 		}
 	},
 	Mutation: {
