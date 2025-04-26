@@ -1,75 +1,89 @@
+import type {
+	ResponseType,
+	Todo,
+	TodoCompleted,
+	TodoId,
+	TodoIdandInput,
+	TodoInput
+} from "@/types/index.js";
 import prisma from "../../config/database.js";
 
 const todoResolver = {
-  Query: {
-    todos: async () =>
-      await prisma.todo.findMany({
-        orderBy: {
-          id: "desc",
-        },
-      }),
+	Query: {
+		todos: async (): Promise<void> =>
+			await prisma.todo.findMany({
+				orderBy: {
+					id: "desc"
+				}
+			}),
 
-    getTodo: async (_, { id }) => {
-      return await prisma.todo.findUnique({
-        where: {
-          id,
-        },
-      });
-    },
-  },
-  Mutation: {
-    createTodo: async (_, { todo }) => {
-      const newTodo = await prisma.todo.create({
-        data: {
-          todo: todo,
-          completed: false,
-        },
-      });
+		getTodo: async (_: any, { id }: TodoId): Promise<Todo> => {
+			return await prisma.todo.findUnique({
+				where: {
+					id
+				}
+			});
+		}
+	},
+	Mutation: {
+		createTodo: async (_: any, { todo }: TodoInput): Promise<Todo> => {
+			const newTodo = await prisma.todo.create({
+				data: {
+					todo: todo,
+					completed: false
+				}
+			});
 
-      return newTodo;
-    },
+			return newTodo;
+		},
 
-    updateTodo: async (_, { id, todo }) => {
-      await prisma.todo.update({
-        where: {
-          id,
-        },
-        data: {
-          todo,
-        },
-      });
+		updateTodo: async (
+			_: any,
+			{ id, todo }: TodoIdandInput
+		): Promise<ResponseType> => {
+			await prisma.todo.update({
+				where: {
+					id
+				},
+				data: {
+					todo
+				}
+			});
 
-      return {
-        message: "Todo Updated Successfully!",
-      };
-    },
+			return {
+				message: "Todo Updated Successfully!"
+			};
+		},
 
-    toggleComplete: async (_, { id, isCompleted }) => {
-      await prisma.todo.update({
-        where: {
-          id,
-        },
-        data: {
-          completed: isCompleted,
-        },
-      });
+		toggleComplete: async (
+			_: any,
+			{ id, completed }: TodoCompleted
+		): Promise<ResponseType> => {
+			await prisma.todo.update({
+				where: {
+					id
+				},
+				data: {
+					completed: completed
+				}
+			});
 
-      return {
-        message: "Todo Updated Successfully!",
-      };
-    },
-    deleteTodo: async (_, { id }) => {
-      await prisma.todo.delete({
-        where: {
-          id,
-        },
-      });
+			return {
+				message: "Todo Updated Successfully!"
+			};
+		},
+		deleteTodo: async (_: any, { id }: TodoId): Promise<ResponseType> => {
+			await prisma.todo.delete({
+				where: {
+					id
+				}
+			});
 
-      return {
-        message: "Todo Deleted Successfully!",
-      };
-    },
-  },
+			return {
+				message: "Todo Deleted Successfully!"
+			};
+		}
+	}
 };
 
 export default todoResolver;
