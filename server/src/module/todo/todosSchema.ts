@@ -1,29 +1,5 @@
-const todosSchema = `#graphql
+import { readFileSync } from "node:fs";
 
-    scalar Date
+const todoSchema = readFileSync("./todo.graphql", "utf-8");
 
-    type ResponseType {
-        message: String
-    }
-
-type Todo {
-    id: Int!
-    todo: String
-    completed: Boolean
-    created_at: Date
-}
-
-type Query {
-    todos: [Todo]
-    getTodo(id: Int): Todo
-}
-
-type Mutation {
-    createTodo(todo: String!): Todo
-    updateTodo(id: Int,todo: String): ResponseType
-    toggleComplete(id: Int, isCompleted: Boolean): ResponseType
-    deleteTodo(id: Int): ResponseType
-}
-`;
-
-export default todosSchema;
+export default todoSchema;
